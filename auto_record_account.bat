@@ -1,0 +1,1 @@
+run_script period_task\auto_record_account_info.py
