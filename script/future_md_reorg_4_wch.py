@@ -72,7 +72,7 @@ def is_earlier_instruments(inst_a, inst_b, by_wind_code=True):
     return inst_num_a < inst_num_b
 
 
-def data_reorg_daily(instrument_type) -> pd.DataFrame:
+def data_reorg_daily(instrument_type) -> (pd.DataFrame, pd.DataFrame):
     """
     将每一个交易日主次合约合约行情信息进行展示
     :param instrument_type: 
@@ -242,7 +242,7 @@ def data_reorg_daily(instrument_type) -> pd.DataFrame:
     return date_noadj_df, date_adj_df
 
 
-def data_reorg_half_daily(instrument_type) -> pd.DataFrame:
+def data_reorg_half_daily(instrument_type) -> (pd.DataFrame, pd.DataFrame):
     """
     将每一个交易日主次合约合约行情信息进行展示
     :param instrument_type: 
@@ -478,7 +478,7 @@ from md_half_day where InstrumentID like %s and UpdateTime BETWEEN '8:30:00' AND
     return date_noadj_df, date_adj_df
 
 
-def data_reorg_min_n(instrument_type, period_type: PeriodType) -> pd.DataFrame:
+def data_reorg_min_n(instrument_type, period_type: PeriodType) -> (pd.DataFrame, pd.DataFrame):
     """
     将每一个交易日主次合约合约行情信息进行展示
     :param instrument_type: 
