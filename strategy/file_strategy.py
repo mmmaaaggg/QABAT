@@ -16,7 +16,7 @@ from ctp.ApiStruct import PSD_History, PSD_Today, OF_CloseYesterday, OF_Close, O
 
 class ReadFileStg(StgBase):
 
-    _folder_path = os.path.abspath(r'..\file_order')
+    _folder_path = os.path.abspath(os.path.join(os.pardir, 'file_order'))
 
     def __init__(self):
         super().__init__()
@@ -74,6 +74,8 @@ class ReadFileStg(StgBase):
             long_pos_s = position_df[['Long_InstrumentID', 'Long_Position']].set_index('Long_InstrumentID')['Long_Position'].dropna()
             target_position = {}
             for instrument_id, position in long_pos_s.items():
+                if instrument_id is None or pd.isna(instrument_id) or instrument_id == '':
+                    continue
                 # 检查当前持仓是否与目标持仓一致，如果一致则清空 self.target_position
                 position_date_pos_info_dic = self.get_position(instrument_id)
                 if position_date_pos_info_dic is not None and len(position_date_pos_info_dic) > 0:
@@ -93,6 +95,8 @@ class ReadFileStg(StgBase):
 
             short_pos_s = position_df[['Short_InstrumentID', 'Short_Position']].set_index('Short_InstrumentID')['Short_Position'].dropna()
             for instrument_id, position in short_pos_s.items():
+                if instrument_id is None or pd.isna(instrument_id) or instrument_id == '':
+                    continue
                 # 检查当前持仓是否与目标持仓一致，如果一致则清空 self.target_position
                 position_date_pos_info_dic = self.get_position(instrument_id)
                 if position_date_pos_info_dic is not None and len(position_date_pos_info_dic) > 0:
@@ -268,7 +272,7 @@ if __name__ == '__main__':
         {
             'name': 'tick',
             'md_period': PeriodType.Tick,
-            'instrument_id_list': ['rb1805', 'i1805'],  # ['jm1711', 'rb1712', 'pb1801', 'IF1710'],
+            'instrument_id_list': ['rb1905', 'i1905'],  # ['jm1711', 'rb1712', 'pb1801', 'IF1710'],
         }]
     run_mode_realtime_params = {
         'run_mode': RunMode.Realtime,
