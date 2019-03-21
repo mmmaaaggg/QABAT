@@ -1429,10 +1429,12 @@ class MyTraderApi(TraderApi, ApiBase):
         if status < 0:
             return
         self.logger.info('持仓:%s', pInvestorPosition)
+        if pInvestorPosition is None:
+            return
+        instrument_id_str = bytes_2_str(pInvestorPosition.InstrumentID)
         data_dic = ApiBase.struct_2_dic(pInvestorPosition)
         # 增加仓位最近刷新时间
         data_dic["RefreshDateTime"] = datetime.now()
-        instrument_id_str = bytes_2_str(pInvestorPosition.InstrumentID)
         position_date = PositionDateType.create_by_position_date(pInvestorPosition.PositionDate)
         self._instrument_investor_position_tmp_dic.setdefault(instrument_id_str, {})[position_date] = data_dic
         self.datetime_last_update_position_dic[instrument_id_str] = datetime.now()
