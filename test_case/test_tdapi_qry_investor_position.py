@@ -12,21 +12,18 @@ import sys
 import time
 import unittest
 from unittest.mock import Mock, patch
-
-from pyctp_api import MyTraderApi
-
+from test_case import get_trader_api_and_login
 
 logger = logging.getLogger(__name__)
 
 
 class SomeTest(unittest.TestCase):  # 继承unittest.TestCase
     def tearDown(self):
-        self.traderapi.Release()
+        self.trader_api.Release()
 
     def setUp(self):
         # 每个测试用例执行之前做操作
-        self.InstrumentID = b'rb1712'
-        self.traderapi = MyTraderApi()
+        self.trader_api = get_trader_api_and_login()
 
     @classmethod
     def tearDownClass(cls):
@@ -43,23 +40,26 @@ class SomeTest(unittest.TestCase):  # 继承unittest.TestCase
         :return:
         """
         logger.info(sys._getframe().f_code.co_name)
+        self.call_count = 0
 
         def replaced_method(pInvestorPosition, pRspInfo, nRequestID, bIsLast):
             """替代模块内相应函数"""
+            self.call_count += 1
             logger.info('OnRspQryInvestorPosition called with: %s %s %s %s', pInvestorPosition, pRspInfo,
                         nRequestID, bIsLast)
             # self.assertEqual(pRspInfo.ErrorID, 0)
             # self.assertEqual(str(pRspInfo.ErrorMsg, encoding='GBK'), '正确')
             self.assertEqual(nRequestID, 3)
-            self.assertEqual(bIsLast, True)
+            self.assertIn(bIsLast, {True, False})
 
-        with patch.object(self.traderapi, 'OnRspQryInvestorPosition', Mock(wraps=replaced_method)) as mock_method:
-            self.traderapi.RegisterFront()
-            self.traderapi.Init()
+        with patch.object(self.trader_api, 'OnRspQryInvestorPosition', Mock(wraps=replaced_method)) as mock_method:
+            self.trader_api.RegisterFront()
+            self.trader_api.Init()
             time.sleep(1)
-            self.traderapi.ReqQryInvestorPosition()
+            self.trader_api.ReqQryInvestorPosition()
             time.sleep(1)
-            self.assertEqual(mock_method.call_count, 1)
+            self.assertGreaterEqual(mock_method.call_count, 1)
+            self.assertEqual(mock_method.call_count, self.call_count)
 
 
 if __name__ == '__main__':

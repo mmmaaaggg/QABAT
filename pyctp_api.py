@@ -937,7 +937,8 @@ class MyTraderApi(TraderApi, ApiBase):
             try:
                 Config.SHFETimeDelta = datetime.strptime(date_str + ' ' + bytes_2_str(pRspUserLogin.SHFETime),
                                                          Config.DATETIME_FORMAT_STR) - datetime_now
-                self.logger.info('与上期所 SHFE（%s）时差 %s', pRspUserLogin.SHFETime, Config.SHFETimeDelta)
+                self.logger.info(
+                    '比上期所 SHFE（%s）慢 %f 秒', pRspUserLogin.SHFETime, Config.SHFETimeDelta.total_seconds())
                 if timedelta_default is None:
                     timedelta_default = Config.SHFETimeDelta
             except:
@@ -950,7 +951,8 @@ class MyTraderApi(TraderApi, ApiBase):
             try:
                 Config.DCETimeDelta = datetime.strptime(date_str + ' ' + bytes_2_str(pRspUserLogin.DCETime),
                                                         Config.DATETIME_FORMAT_STR) - datetime_now
-                self.logger.info('与大商所 DCE（%s）时差 %s', pRspUserLogin.DCETime, Config.DCETimeDelta)
+                self.logger.info(
+                    '比大商所 DCE（%s）慢 %f 秒', pRspUserLogin.DCETime, Config.DCETimeDelta.total_seconds())
                 if timedelta_default is None:
                     timedelta_default = Config.DCETimeDelta
             except:
@@ -963,7 +965,8 @@ class MyTraderApi(TraderApi, ApiBase):
             try:
                 Config.CZCETimeDelta = datetime.strptime(date_str + ' ' + bytes_2_str(pRspUserLogin.CZCETime),
                                                          Config.DATETIME_FORMAT_STR) - datetime_now
-                self.logger.info('与郑商所 CZCE（%s）时差 %s', pRspUserLogin.CZCETime, Config.CZCETimeDelta)
+                self.logger.info(
+                    '比郑商所 CZCE（%s）慢 %f 秒', pRspUserLogin.CZCETime, Config.CZCETimeDelta.total_seconds())
                 if timedelta_default is None:
                     timedelta_default = Config.CZCETimeDelta
             except:
@@ -976,7 +979,8 @@ class MyTraderApi(TraderApi, ApiBase):
             try:
                 Config.FFEXTimeDelta = datetime.strptime(date_str + ' ' + bytes_2_str(pRspUserLogin.FFEXTime),
                                                          Config.DATETIME_FORMAT_STR) - datetime_now
-                self.logger.info('与中金所 FFEX（%s）时差 %s', pRspUserLogin.FFEXTime, Config.FFEXTimeDelta)
+                self.logger.info(
+                    '比中金所 FFEX（%s）慢 %f 秒', pRspUserLogin.FFEXTime, Config.FFEXTimeDelta.total_seconds())
                 if timedelta_default is None:
                     timedelta_default = Config.FFEXTimeDelta
             except:
@@ -989,7 +993,8 @@ class MyTraderApi(TraderApi, ApiBase):
             try:
                 Config.INETimeDelta = datetime.strptime(date_str + ' ' + bytes_2_str(pRspUserLogin.INETime),
                                                         Config.DATETIME_FORMAT_STR) - datetime_now
-                self.logger.info('与能源中心 INE（%s）时差 %s', pRspUserLogin.INETime, Config.INETimeDelta)
+                self.logger.info(
+                    '比能源中心 INE（%s）慢 %f 秒', pRspUserLogin.INETime, Config.INETimeDelta.total_seconds())
                 if timedelta_default is None:
                     timedelta_default = Config.INETimeDelta
             except:
