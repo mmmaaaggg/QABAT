@@ -9,7 +9,7 @@ import unittest
 import pandas as pd
 from unittest.mock import Mock, patch
 from pyctp_api import MyMdApi
-from config import Config, Direction, Action
+from config import Config, Direction, Action, RunMode
 import time
 from datetime import timedelta
 import sys
@@ -69,10 +69,15 @@ class TestBacktestTraderAgent(unittest.TestCase):
 
     def test_open_long_ActionTime(self):
         stg_run_id = 1
-        trade_agent = BacktestTraderAgent(stg_run_id)
+        run_mode_realtime_params = {
+            'run_mode': RunMode.Backtest,
+            'enable_timer_thread': True,
+            'seconds_of_timer_interval': 15,
+        }
+        trade_agent = BacktestTraderAgent(stg_run_id, run_mode_realtime_params)
         trade_agent.connect()
         trade_agent.curr_md = {'ActionDay': '2017-2-1',
-                               'ActionTime': Timedelta(hours=10, minutes=30, seconds=21),  # '10:30:21',
+                               'ActionTime': pd.Timedelta(hours=10, minutes=30, seconds=21),  # '10:30:21',
                                'ActionMillisec': 500}
         instrument_id = 'rb1712'
         order_price = 12345.5

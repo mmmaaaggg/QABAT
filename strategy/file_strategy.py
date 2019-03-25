@@ -257,6 +257,7 @@ class ReadFileStg(StgBase):
         # 更新最近执行时间
         self.instrument_last_deal_datetime[instrument_id] = datetime.now()
 
+
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG, format=Config.LOG_FORMAT)
     # 参数设置

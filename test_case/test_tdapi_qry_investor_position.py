@@ -25,7 +25,6 @@ class SomeTest(unittest.TestCase):  # 继承unittest.TestCase
 
     def setUp(self):
         # 每个测试用例执行之前做操作
-        self.InvestorID = b'071001'
         self.InstrumentID = b'rb1712'
         self.traderapi = MyTraderApi()
 

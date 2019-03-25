@@ -113,7 +113,7 @@ class TestMyTraderApi(unittest.TestCase):
              time.sleep(1)
              self.traderapi.ReqQrySettlementInfoConfirm()
              time.sleep(1)
-             self.assertEqual(mock_method.call_count, 2)
+             self.assertEqual(mock_method.call_count, 1)
 
      def test_OnRspQrySettlementInfo(self):
          """

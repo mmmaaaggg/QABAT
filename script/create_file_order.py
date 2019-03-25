@@ -19,4 +19,4 @@ def create_file(long_inst_id='', long_position=0, short_inst_id='', short_positi
 
 
 if __name__ == "__main__":
-    create_file(long_inst_id='rb1905', long_position=1)
+    create_file(long_inst_id='rb1905', long_position=2)
