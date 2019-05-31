@@ -562,7 +562,8 @@ try:
         Config.get_db_engine(Config.DB_SCHEMA_MD)), autoload=True)
     mapper(CommissionRateModel, instrument_commission_rate_table)
 except:
-    logging.exception('mapping error')
+    # logging.exception('mapping error')
+    pass
 
 
 if __name__ == "__main__":
