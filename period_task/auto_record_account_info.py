@@ -64,7 +64,7 @@ def get_account_info():
             "可用资金": pTradingAccount.Available,
             "手续费": pTradingAccount.Commission,
             "风险度": (pTradingAccount.CurrMargin / pTradingAccount.Balance) if pTradingAccount.Balance != 0 else np.nan,
-        # 期货风险度=持仓保证金/客户权益
+            # 期货风险度=持仓保证金/客户权益
         }
         logger.info("trading_account_dic:%s", trading_account_dic)
         cur_df = pd.DataFrame([trading_account_dic])
@@ -95,17 +95,24 @@ def auto_record_account_info(file_path):
     """
     fild_path_name, file_extension = os.path.splitext(file_path)
     cur_df = get_account_info()
-    data_df = pd.read_excel(file_path)
+    if cur_df is None:
+        return
     col_name_list = ["日期", "累计净值", "静态权益", "动态权益", "占用保证金", "总盈亏", "持仓盈亏",
                      "可用资金", "手续费", "风险度", "资金净流入", "备注"]
-    tot_df = data_df.append(cur_df)[col_name_list]
+    if os.path.exists(file_path):
+        data_df = pd.read_excel(file_path)
+        tot_df = data_df.append(cur_df)[col_name_list]
+    else:
+        tot_df = cur_df[[_ for _ in col_name_list if _ in cur_df]]
+
     tot_df["日期"] = tot_df["日期"].apply(date_2_str)
     logger.info("最新账户信息：\n%s", tot_df)
     file_path_new = fild_path_name + date_2_str(tot_df["日期"].iloc[-1]) + file_extension
     logger.info("最新文件路径：\n%s", file_path_new)
     tot_df.to_excel(file_path_new, index=False)
 
+
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG, format=Config.LOG_FORMAT)
-    file_path = r"d:\Works\F复华投资\RubberOpportunityFund\资金及净值记录.xlsx"
+    file_path = r"C:\Users\26559\Documents\Download\资金及净值记录.xlsx"
     auto_record_account_info(file_path)
