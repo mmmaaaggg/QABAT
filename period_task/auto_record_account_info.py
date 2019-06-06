@@ -4,6 +4,7 @@ Created on 2018/1/11
 @author: MG
 """
 import logging
+import shutil
 from unittest.mock import Mock, patch
 import time, re, os
 from datetime import datetime, timedelta
@@ -96,6 +97,7 @@ def auto_record_account_info(file_path):
     fild_path_name, file_extension = os.path.splitext(file_path)
     cur_df = get_account_info()
     if cur_df is None:
+        logger.debug('没有获取到数据')
         return
     col_name_list = ["日期", "累计净值", "静态权益", "动态权益", "占用保证金", "总盈亏", "持仓盈亏",
                      "可用资金", "手续费", "风险度", "资金净流入", "备注"]
@@ -110,9 +112,10 @@ def auto_record_account_info(file_path):
     file_path_new = fild_path_name + date_2_str(tot_df["日期"].iloc[-1]) + file_extension
     logger.info("最新文件路径：\n%s", file_path_new)
     tot_df.to_excel(file_path_new, index=False)
+    shutil.copyfile(file_path_new, file_path)
 
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG, format=Config.LOG_FORMAT)
-    file_path = r"C:\Users\26559\Documents\Download\资金及净值记录.xlsx"
+    file_path = r"C:\Users\26559\Documents\工作\自营操盘\资金及净值记录.xlsx"
     auto_record_account_info(file_path)
