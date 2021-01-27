@@ -230,16 +230,14 @@ class ConfigBase:
     DATE_FORMAT_STR_CTP = '%Y%m%d'
     TIME_FORMAT_STR_CTP = '%H%M%S'
     # api configuration
-    BROKER_ID = b'9999'
-    USER_ID = b'071001'
-    INVESTOR_ID = b'071001'
-    PASSWORD = b'12348765'
-    # FRONT_TRADER_ADDRESS = b'tcp://180.168.146.187:10030'  # SIMNOW 第二套【7x24】
-    FRONT_TRADER_ADDRESS = b'tcp://180.168.146.187:10000'  # SIMNOW
-    FRONT_MD_ADDRESS = b'tcp://180.168.146.187:10010'  # SIMNOW
+    BROKER_ID = b'***'
+    USER_ID = b'***'
+    INVESTOR_ID = b'***'
+    PASSWORD = b'***'
+    # FRONT_TRADER_ADDRESS = b'tcp://0.0.0.0:10030'  # SIMNOW 第二套【7x24】
+    FRONT_TRADER_ADDRESS = b'tcp://0.0.0.0:10000'  # SIMNOW
+    FRONT_MD_ADDRESS = b'tcp://0.0.0.0:10010'  # SIMNOW
 
-    # "http://10.0.3.84:5000/wind/"
-    # "http://10.0.3.78:5000/wind/" 王宇
     WIND_REST_URL = "http://10.0.5.61:5000/wind/"  # "http://10.0.5.110:5000/wind/"  "http://10.0.3.78:5000/wind/"
 
     # mysql db info
