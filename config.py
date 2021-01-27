@@ -252,42 +252,42 @@ class ConfigBase:
                             'DB_PORT': '3306',
                             'DB_NAME': 'fof_ams_dev',
                             'DB_USER': 'mg',
-                            'DB_PASSWORD': 'Dcba1234'
+                            'DB_PASSWORD': '***'
                             },
         DB_SCHEMA_MD: {'type': 'mysql',
                        'DB_IP': '10.0.3.66',
                        'DB_PORT': '3306',
                        'DB_NAME': 'future_md',
                        'DB_USER': 'mg',
-                       'DB_PASSWORD': 'Dcba1234'
+                       'DB_PASSWORD': '***'
                        },
         'future_md_test': {'type': 'mysql',
                        'DB_IP': '10.0.3.66',
                        'DB_PORT': '3306',
                        'DB_NAME': 'future_md_test',
                        'DB_USER': 'mg',
-                       'DB_PASSWORD': 'Dcba1234'
+                       'DB_PASSWORD': '***'
                        },
         DB_SCHEMA_QABAT: {'type': 'mysql',
                           'DB_IP': '10.0.3.66',
                           'DB_PORT': '3306',
                           'DB_NAME': 'qabat',
                           'DB_USER': 'mg',
-                          'DB_PASSWORD': 'Dcba1234'
+                          'DB_PASSWORD': '***'
                           },
         DB_SCHEMA_PROD: {'type': 'mysql',
                          'DB_IP': '10.0.5.111',
                          'DB_PORT': '3306',
                          'DB_NAME': 'fof_ams_db',
                          'DB_USER': 'mg',
-                         'DB_PASSWORD': 'Dbca1234'
+                         'DB_PASSWORD': '***'
                          },
         DB_SCHEMA_PROPHETS_MD: {'type': 'mysql',
                          'DB_IP': '39.104.20.82',
                          'DB_PORT': '3306',
                          'DB_NAME': DB_SCHEMA_PROPHETS_MD,
                          'DB_USER': 'mg',
-                         'DB_PASSWORD': 'Abcd1234'
+                         'DB_PASSWORD': '***'
                          },
     }
     # mongo db info
@@ -783,12 +783,12 @@ class ConfigBase:
 class ConfigProduct(ConfigBase):
     # 国投安信
     # api configuration
-    BROKER_ID = b'4500'
-    USER_ID = b'0310100789'
-    INVESTOR_ID = b'0310100789'
-    PASSWORD = b'Abcd1234'
-    FRONT_TRADER_ADDRESS = b'tcp://101.200.144.24:41205'
-    FRONT_MD_ADDRESS = b'tcp://101.200.144.24:41213'
+    BROKER_ID = b'***'
+    USER_ID = b'***'
+    INVESTOR_ID = b'***'
+    PASSWORD = b'***'
+    FRONT_TRADER_ADDRESS = b'tcp://0.0.0.0:41205'
+    FRONT_MD_ADDRESS = b'tcp://0.0.0.0:41213'
 
     # redis info
     # REDIS_INFO_DIC = {'REDIS_HOST': '127.0.0.1',
@@ -882,7 +882,7 @@ if __name__ == "__main__":
 
     # with_mongo_collection(lambda collection: [print(raw) for raw in collection.find()],
     #                            'hello', db_name='test')
-    # client = MongoClient('mongodb://%s:%s/' % (Config.MONGO_DB_URL, Config.MONGO_DB_PORT))  # 'mongodb://mg:Abcd123@10.0.3.66:27017/'
-    # client = MongoClient('10.0.3.66", "27017')  # 'mongodb://mg:Abcd123@10.0.3.66:27017/'
+    # client = MongoClient('mongodb://%s:%s/' % (Config.MONGO_DB_URL, Config.MONGO_DB_PORT))  # 'mongodb://mg:***@10.0.3.66:27017/'
+    # client = MongoClient('10.0.3.66", "27017')  # 'mongodb://mg:***@10.0.3.66:27017/'
     # collection = client['test']['hello']
     # [print(raw) for raw in collection.find()]
