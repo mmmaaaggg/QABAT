@@ -1,4 +1,4 @@
-celery==4.2.1
+celery==5.2.2
 ctp==0.2.1
 mysqlclient==1.4.1
 numpy==1.16.1
