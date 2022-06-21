@@ -1,7 +1,7 @@
 celery==4.2.1
 ctp==0.2.1
 mysqlclient==1.4.1
-numpy==1.16.1
+numpy==1.22.0
 pandas==0.24.2
 pymongo==3.8.0
 redis==3.2.1
